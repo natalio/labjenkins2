@@ -1,0 +1,17 @@
+server:
+  port: 8082
+spring:
+  datasource:
+    url: jdbc:h2:mem:mydb
+    username: sa
+    password: dani123
+    driverClassName: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+      dialect: org.hibernate.dialect.H2Dialect
+      jdbc:
+        lob.non-contextual-creation: true
+    properties:
+      hibernate:
+        show_sql: true
