@@ -42,6 +42,12 @@ pipeline {
         }
 
         stage('Preparando implantacao') {
+            when{
+                anyOf {
+                    branch 'dev';
+                    branch 'release/*';
+                }
+            }
             steps {
                 script{
                     docker.withServer('tcp://172.18.50.38:2375', 'server_access') {
@@ -52,6 +58,12 @@ pipeline {
         }
 
         stage ('implantacao') {
+            when{
+                anyOf {
+                    branch 'dev';
+                    branch 'release/*';
+                }
+            }
             steps{
                 script{
                     docker.withServer('tcp://172.18.50.38:2375', 'server_access') {
