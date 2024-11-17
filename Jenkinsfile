@@ -57,7 +57,7 @@ pipeline {
                     docker.withServer('tcp://172.18.50.38:2375', 'server_access') {
                         sh 'docker stop curse1'
                         sh 'docker rm curse1'
-                        sh 'docker run --name curse1 -p 8888:8080 -d uniteltmais/curse1:latest'
+                        sh 'docker run --name curse1 -p 8888:8080 -d uniteltmais/curse:latest'
                     }
                 }
             }
