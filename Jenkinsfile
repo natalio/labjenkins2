@@ -45,7 +45,7 @@ pipeline {
             steps {
                 script{
                     docker.withServer('tcp://172.18.50.38:2375', 'server_access') {
-                        customImage = docker.build("uniteltmais/auth2")
+                        customImage = docker.build("uniteltmais/curse")
                     }
                 }
             }
@@ -55,9 +55,9 @@ pipeline {
             steps{
                 script{
                     docker.withServer('tcp://172.18.50.38:2375', 'server_access') {
-                        sh 'docker stop auth2test'
-                        sh 'docker rm auth2test'
-                        sh 'docker run --name auth2test -p 8888:8080 -d uniteltmais/auth2:latest'
+                        sh 'docker stop curse1'
+                        sh 'docker rm curse1'
+                        sh 'docker run --name auth2test -p 8888:8080 -d uniteltmais/curse1:latest'
                     }
                 }
             }
