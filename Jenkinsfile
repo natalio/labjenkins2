@@ -42,22 +42,39 @@ pipeline {
         }
 
         stage('Preparando implantacao') {
+            when{
+                anyOf {
+                    branch 'dev';
+                    branch 'release/*';
+                }
+            }
             steps {
                 script{
                     docker.withServer('tcp://172.18.50.38:2375', 'server_access') {
-                        customImage = docker.build("uniteltmais/auth2")
+                        customImage = docker.build("uniteltmais/curse")
                     }
                 }
             }
         }
 
-        stage ('Implantando') {
+        stage ('implantacao') {
+            when{
+                anyOf {
+                    branch 'dev';
+                    branch 'release/*';
+                }
+            }
             steps{
                 script{
                     docker.withServer('tcp://172.18.50.38:2375', 'server_access') {
-                        sh 'docker stop auth2test'
-                        sh 'docker rm auth2test'
-                        sh 'docker run --name auth2test -p 8888:8080 -d uniteltmais/auth2:latest'
+                        try{
+                            sh 'docker stop curse1'
+                            sh 'docker rm curse1'
+                        }catch(e){
+
+                        }
+
+                        sh 'docker run --name curse1 -p 8889:8082 -d uniteltmais/curse:latest'
                     }
                 }
             }
